@@ -8,13 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var notesView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        notesView.delegate = self
+        notesView.text = UserDefaults.standard.string(forKey: "notesKey")
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        UserDefaults.standard.set(notesView.text, forKey: "notesKey")
+    }
 
 }
 
